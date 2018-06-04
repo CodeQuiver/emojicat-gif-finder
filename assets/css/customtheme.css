@@ -1,4 +1,10 @@
-*,
+/* reference: color scheme basically is
+ultramarine #061283
+watermelon #fd3c3c
+turquoise #138d90
+sunshine #ffb74c
+*/
+
 body,
 button,
 div,
@@ -11,14 +17,73 @@ input
 button,
 div,
 form,
-input {
+input,
+header{
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 h1{
-    color: indigo;
-    font-size: 60px;
+    /* color: #e7472e; */
+    color: #fd3c3c;
+    font-size: 48px;
     text-align: center;
     font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
 }
+
+a:link, a:visited {
+    color: #138d90;
+}
+
+a:hover, a:active, a:focus {
+    color: #fd3c3c;
+}
+
+/* custom button styles */
+.btn-info { 
+    color: #ffffff; 
+    background-color: #061283; 
+    border-color: #061283; 
+  } 
+   
+  .btn-info:hover, 
+  .btn-info:focus, 
+  .btn-info:active, 
+  .btn-info.active, 
+  .open .dropdown-toggle.btn-info { 
+    color: #ffffff; 
+    background-color: #138d90; 
+    border-color: #061283; 
+  } 
+   
+  .btn-info:active, 
+  .btn-info.active, 
+  .open .dropdown-toggle.btn-info { 
+    background-image: none; 
+  } 
+   
+  .btn-info.disabled, 
+  .btn-info[disabled], 
+  fieldset[disabled] .btn-info, 
+  .btn-info.disabled:hover, 
+  .btn-info[disabled]:hover, 
+  fieldset[disabled] .btn-info:hover, 
+  .btn-info.disabled:focus, 
+  .btn-info[disabled]:focus, 
+  fieldset[disabled] .btn-info:focus, 
+  .btn-info.disabled:active, 
+  .btn-info[disabled]:active, 
+  fieldset[disabled] .btn-info:active, 
+  .btn-info.disabled.active, 
+  .btn-info[disabled].active, 
+  fieldset[disabled] .btn-info.active { 
+    background-color: #061283; 
+    border-color: #061283; 
+  } 
+   
+  .btn-info .badge { 
+    color: #061283; 
+    background-color: #ffffff; 
+  }
+/* end custom button styles */

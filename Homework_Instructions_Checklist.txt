@@ -6,5 +6,7 @@
 
    - create html page with bootstrap for layout- done
    - link all files and do styling - done
-   - create github repo for project and do first commit
+   - create github repo for project and do first commit- done
+   - troubleshoot stylesheets- caught that I had bootstrap styles overriding my customtheme and fixed the link order - done
+   - finalize non-javascript files - done
    - write js code to create buttons from array

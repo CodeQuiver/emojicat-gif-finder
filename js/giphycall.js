@@ -1,9 +1,10 @@
 // Pseudocode for EmojiCat app
+//
 
 //create an array of strings, each one related to a topic that interests you. Save it to a variable called `topics`.
 
 var topics = ["happy cat","sad cat","angry cat","annoyed cat","sneaky cat","funny cat","cool cat","hyper cat","ninja cat","sleepy cat","shy cat","transcendance cat"];
-
+//changing this to remove the word "cat", will add it in to every search to make it integrated part of site
 
 //initialize other variables here as needed
 
