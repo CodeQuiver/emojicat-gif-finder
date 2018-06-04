@@ -1,28 +1,49 @@
 // Pseudocode for EmojiCat app
-//
+//add document ready function later//
 
-//create an array of strings, each one related to a topic that interests you. Save it to a variable called `topics`.
-
+// ============================== Declare Global Variables ====================================================
 var topics = ["happy","sad","angry","annoyed","sneaky","funny","cool","hyper","sleepy","shy","relaxed","excited"];
-//changing this to remove the word "cat", will add it in to the search url to make it integrated part of site
+  //initial array to be used for topic buttons
+
+// ============================== End Global Variables ====================================================
 
 // ============================== Declare Functions Here ====================================================
 
-// Function for displaying topic buttons
-function renderButtons() {
+// take the topics array and create buttons in your HTML
+ // Function for displaying topic buttons
+ function renderButtons() {
+ 
+   // Deleting the topics before adding new ones to avoid repeats
+   $("#buttons-view").empty();
 
-  // Deleting the topics before adding new ones to avoid repeats
-  $("#buttons-view").empty();
-
-  $.each(topics, function(i, buttonName) {
+   for (i = 0; i < topics.length; i++) {
+    var buttonName = topics[i];
     console.log(buttonName);
     var button = $("<button>").text(buttonName);
     button.attr("type", "button");
     button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
     button.attr("data-name", buttonName);
-    $("#buttons-view").append(button);      
-  });
-}
+    $("#buttons-view").append(button);    
+     
+   };
+ 
+ }
+
+// // Function for displaying topic buttons
+// function renderButtons() {
+
+//   // Deleting the topics before adding new ones to avoid repeats
+//   $("#buttons-view").empty();
+
+//   $.each(topics, function() {
+//     console.log(buttonName);
+//     var button = $("<button>").text(buttonName);
+//     button.attr("type", "button");
+//     button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
+//     button.attr("data-name", buttonName);
+//     $("#buttons-view").append(button);      
+//   });
+// }
 
 //function runs when a topic button is clicked - AJAX call
 
@@ -46,6 +67,9 @@ function topicClicked(input) {
     //add another for each loop to cover each result in the array
 
         // create image element
+        // get image wanted from object and store in variable
+        var pulledGif = response.data[2].images.fixed_height_still.url;
+        console.log("Gif pulled is: " + pulledGif);
         // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
         
         // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
