@@ -24,12 +24,21 @@ header{
 }
 
 h1{
-    /* color: #e7472e; */
-    color: #fd3c3c;
-    font-size: 48px;
+    color: #138d90;
+    font-size: 54px;
     text-align: center;
     font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 600;
+    margin-bottom: 0;
+}
+
+h2{
+    color: #fd3c3c;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    margin-top: 0;
 }
 
 a:link, a:visited {
