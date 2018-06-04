@@ -6,8 +6,8 @@
 var topics = ["happy","sad","angry","annoyed","sneaky","funny","cool","hyper","sleepy","shy","relaxed","excited"];
 //changing this to remove the word "cat", will add it in to the search url to make it integrated part of site
 
+// ============================== Declare Functions Here ====================================================
 
-//take the topics array and create buttons in your HTML
 // Function for displaying topic buttons
 function renderButtons() {
 
@@ -22,47 +22,97 @@ function renderButtons() {
     button.attr("data-name", buttonName);
     $("#buttons-view").append(button);      
   });
-
 }
+
+//function runs when a topic button is clicked - AJAX call
+
+function topicClicked(input) {
+
+  //construct query url
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+  input + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
+        //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a 
+        // dash instead of space since that's what giphy's search function uses in the urls
+  console.log(queryURL);
+
+  //AJAX call
+  $.ajax({
+  url: queryURL,
+  method: "GET"
+  }).then(function(response) {
+
+  console.log(response); //logs entire object including all 10 results
+    
+    //add another for each loop to cover each result in the array
+
+        // create image element
+        // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
+        
+        // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
+        
+        // add necessary classes to element for bootstrap spacing
+
+        // append the image to #gifs-view
+  });
+}
+
+// ============================== End Function Declarations ====================================================
 
 // ==================================not yet added section- adding new topic buttons via the form=====================
     // fill in code here
 
 
-// ================================ WORKING SECTION NOW events when topic buttons are clicked =================================
+// ================================ Main Code Body - Events and Function Calls =================================
 
-//onclick function to display gifs- should be listening for buttons with ".topic-btn" class
+//onclick event to display gifs- should be listening for buttons with ".topic-btn" class- calls function to query ajax then calls function to print array to page
+$("#buttons-view").on("click", ".topic-btn", function() {
+  //clear previous gifs from div before adding new ones
+  $("#gifs-view").empty();
 
   // store data-name from the clicked button in a variable to use in the queryurl
-  // In this case, the "this" keyword refers to the button that was clicked
   var topic = $(this).attr("data-name");
 
-  //construct query url
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        topic + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
-        //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a dash instead of space since that's what giphy's search function uses in the urls
-  console.log(queryURL);
+  topicClicked(topic);
+} );
+
+
+
+
+// call function to add all buttons to page
+renderButtons();
+
+  // //clear previous gifs from div before adding new ones
+  // $("#gifs-view").empty();
+
+  // // store data-name from the clicked button in a variable to use in the queryurl
+  // var topic = $(this).attr("data-name");
+
+  // //construct query url
+  // var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+  //       topic + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
+  //       //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a dash instead of space since that's what giphy's search function uses in the urls
+  // console.log(queryURL);
        
 
-  //AJAX call
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
+  // //AJAX call
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
+  // }).then(function(response) {
 
-    console.log(response); //logs entire object including all 10 results
+  //   console.log(response); //logs entire object including all 10 results
       
-      //add another for each loop to cover each result in the array
+  //     //add another for each loop to cover each result in the array
 
-          // create image element
-          // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
+  //         // create image element
+  //         // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
           
-          // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
+  //         // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
           
-          // add necessary classes to element for bootstrap spacing
+  //         // add necessary classes to element for bootstrap spacing
 
-          // append the image to #gifs-view
-  });
+  //         // append the image to #gifs-view
+  // });
 
 
 
@@ -113,5 +163,4 @@ function renderButtons() {
 
 //END animation function
 
-// call function to add all buttons to page
-renderButtons();
+
