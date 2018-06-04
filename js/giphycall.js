@@ -9,41 +9,25 @@ var topics = ["happy","sad","angry","annoyed","sneaky","funny","cool","hyper","s
 
 // ============================== Declare Functions Here ====================================================
 
-// take the topics array and create buttons in your HTML
- // Function for displaying topic buttons
- function renderButtons() {
- 
-   // Deleting the topics before adding new ones to avoid repeats
-   $("#buttons-view").empty();
+// Function for displaying topic buttons
+function renderButtons() {
+  // Deleting the topics before adding new ones to avoid repeats
+  $("#buttons-view").empty();
 
-   for (i = 0; i < topics.length; i++) {
-    var buttonName = topics[i];
-    console.log(buttonName);
-    var button = $("<button>").text(buttonName);
-    button.attr("type", "button");
-    button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
-    button.attr("data-name", buttonName);
-    $("#buttons-view").append(button);    
-     
-   };
- 
- }
+  // main function loop
+  for (i = 0; i < topics.length; i++) {
+  var buttonName = topics[i];
+  console.log(buttonName);
+  var button = $("<button>").text(buttonName);
+  button.attr("type", "button");
+  button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
+  button.attr("data-name", buttonName);
+  $("#buttons-view").append(button);    
+    
+  };
 
-// // Function for displaying topic buttons
-// function renderButtons() {
+}
 
-//   // Deleting the topics before adding new ones to avoid repeats
-//   $("#buttons-view").empty();
-
-//   $.each(topics, function() {
-//     console.log(buttonName);
-//     var button = $("<button>").text(buttonName);
-//     button.attr("type", "button");
-//     button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
-//     button.attr("data-name", buttonName);
-//     $("#buttons-view").append(button);      
-//   });
-// }
 
 //function runs when a topic button is clicked - AJAX call
 
