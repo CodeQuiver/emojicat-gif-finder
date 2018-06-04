@@ -9,4 +9,8 @@
    - create github repo for project and do first commit- done
    - troubleshoot stylesheets- caught that I had bootstrap styles overriding my customtheme and fixed the link order - done
    - finalize non-javascript files - done
-   - write js code to create buttons from array
+   - write js code to create buttons from array and successfully test - done
+
+3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
+    - pseudocode this part
+    - actually code the sections of this part- url and AJAX call

@@ -6,8 +6,6 @@
 var topics = ["happy","sad","angry","annoyed","sneaky","funny","cool","hyper","sleepy","shy","relaxed","excited"];
 //changing this to remove the word "cat", will add it in to the search url to make it integrated part of site
 
-//initialize other variables here as needed
-
 
 //take the topics array and create buttons in your HTML
 // Function for displaying topic buttons
@@ -27,18 +25,58 @@ function renderButtons() {
 
 }
 
-renderButtons();
-
-  //create button with appropriate attributes- type="button" class="btn btn-md btn-info topic-btn"
-  // we'll use the topic-button class later to attach the behavior to each button
-  //append child to #buttons-view div
+// ==================================not yet added section- adding new topic buttons via the form=====================
+    // fill in code here
 
 
+// ================================ WORKING SECTION NOW events when topic buttons are clicked =================================
+
+//onclick function to display gifs- should be listening for buttons with ".topic-btn" class
+
+  // store data-name from the clicked button in a variable to use in the queryurl
+  // In this case, the "this" keyword refers to the button that was clicked
+  var topic = $(this).attr("data-name");
+
+  //construct query url
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        topic + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
+        //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a dash instead of space since that's what giphy's search function uses in the urls
+  console.log(queryURL);
+       
+
+  //AJAX call
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+
+    console.log(response); //logs entire object including all 10 results
+      
+      //add another for each loop to cover each result in the array
+
+          // create image element
+          // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
+          
+          // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
+          
+          // add necessary classes to element for bootstrap spacing
+
+          // append the image to #gifs-view
+  });
 
 
 
 
 
+
+
+
+
+
+
+
+
+ // ==================================not yet added section- function to start and stop gifs animating=====================
 // //on-click function to start and stop gifs animating
 // $(".gif").on("click", function() {
 
@@ -72,3 +110,8 @@ renderButtons();
 //       } //this defaults to a still image if there's something wrong and neither value matches
 
 //     });
+
+//END animation function
+
+// call function to add all buttons to page
+renderButtons();
