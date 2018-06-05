@@ -109,9 +109,6 @@ function toggleGifState() {
 
 // ============================== End Function Declarations ====================================================
 
-// ==================================not yet added section- adding new topic buttons via the form=====================
-    // fill in code here
-
 
 // ================================ Main Code Body - Events and Function Calls =================================
 
@@ -127,12 +124,19 @@ $("#buttons-view").on("click", ".topic-btn", function() {
 } );
 
 
-//onclick event to animate and stop animation of gifs
-// Adding a click event listener to all elements with a class of "gif"
- $(document).on("click", ".gif", toggleGifState);
+// ==================================not yet added section- adding new topic buttons via the form=====================
+  // triggered by submit button on form- study note - can be bound directly to the button without separate listener because button is original part of the DOM
+  // get value from input, trim spaces, and store in variable
+  // push new input to topics array
+  // call renderButtons function to re-print the array with new buttons added
 
 
-// call function to add all buttons to page
+
+//  onclick event to animate and stop animation of gifs
+// Adding a click event listener to all elements with a class of "gif" that will call the toggleGifState function
+$(document).on("click", ".gif", toggleGifState);
+
+// call function to add all buttons to page initially
 renderButtons();
 
 
