@@ -58,16 +58,12 @@ function topicClicked(input) {
     // loop through each result item in results array
     for (i = 0; i < results.length; i++){
 
-        // get image wanted to display from object and store in variable
-        // var currentGif = results[i].images.fixed_height_still.url;
-
         //get still and animated version urls and store in variables
         var stillGif = results[i].images.fixed_height_still.url;
         var animatedGif = results[i].images.fixed_height.url;
 
-        // console.log("currentGif is: " + currentGif);
-        console.log("stillGif is: " + stillGif);
-        console.log("animatedGif is: " + animatedGif);
+        // console.log("stillGif is: " + stillGif);
+        // console.log("animatedGif is: " + animatedGif);
 
         // create image element
         var imgOutput = $("<img>");
@@ -84,6 +80,31 @@ function topicClicked(input) {
         $("#gifs-view").append(imgOutput);
     }
   });
+}
+
+function toggleGifState() {
+
+  //pull and store values
+  var state = $(this).attr("data-state");
+  var still = $(this).attr("data-still");
+  var animate = $(this).attr("data-animate");
+
+  if (state === "still") {
+  $(this).attr("src", animate);
+  $(this).attr("data-state","animate");
+  }
+
+  else if (state === "animate") {
+    $(this).attr("src", still);
+    $(this).attr("data-state","still");
+  }
+
+  else {
+    $(this).attr("src", still);
+    $(this).attr("data-state","still");
+    console.log("toggleGifState function error - defaulted to still image- state is " + state);
+  } //this defaults to a still image if there's something wrong and neither value matches, also prints error to console
+
 }
 
 // ============================== End Function Declarations ====================================================
@@ -106,50 +127,13 @@ $("#buttons-view").on("click", ".topic-btn", function() {
 } );
 
 
+//onclick event to animate and stop animation of gifs
+// Adding a click event listener to all elements with a class of "gif"
+ $(document).on("click", ".gif", toggleGifState);
 
 
 // call function to add all buttons to page
 renderButtons();
 
-
-
-
-
- // ==================================not yet added section- function to start and stop gifs animating=====================
-// //on-click function to start and stop gifs animating
-// $(".gif").on("click", function() {
-
-//       var state = $(this).attr("data-state");
-//       console.log(state);
-
-//       // =============================================
-
-//       // Check if the variable state is equal to 'still',
-//       // then update the src attribute of this image to it's data-animate value,
-//       // and update the data-state attribute to 'animate'.
-
-//       // If state is equal to 'animate', then update the src attribute of this
-//       // image to it's data-still value and update the data-state attribute to 'still'
-//       // =======================================
-
-//       if (state === "still") {
-//         $(this).attr("src", $(this).attr("data-animate")); //nested reference here, might be cleaner to have created a variable for each of the urls we're switching like with still and animate
-//         $(this).attr("data-state","animate");
-
-//       }
-
-//       else if (state === "animate") {
-//         $(this).attr("src",$(this).attr("data-still"));
-//         $(this).attr("data-state","still");
-//       }
-      
-//       else {
-//         $(this).attr("src",$(this).attr("data-still"));
-//         $(this).attr("data-state","still");
-//       } //this defaults to a still image if there's something wrong and neither value matches
-
-//     });
-
-//END animation function
 
 
