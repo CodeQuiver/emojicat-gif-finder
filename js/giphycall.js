@@ -27,17 +27,12 @@ function renderButtons() {
 }
 
 //function runs when a topic button is clicked - AJAX call
-
 function topicClicked(input) {
 
   //construct query url
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
   input + "+cat&api_key=dc6zaTOxFJmzC&limit=10";
 
-  //Later may want to add offset property to search and possibly randomize the offset for more random results
-  //Alternate other search- random endpoint with tag of input parameter, but only returns one result so would need to be looped to build an object array
-  // var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
-  // input + "+cat&api_key=dc6zaTOxFJmzC";
         //note I hard-coded the "+cat" so that all searches will be for cat images like "happy+cat" per documentation for handling phrases
   console.log(queryURL);
 
@@ -69,14 +64,22 @@ function topicClicked(input) {
 
         // add source attribute (still version), classes, data-state
         imgOutput.attr("src", stillGif);
-        imgOutput.attr("class","gif m-2 rounded").attr("data-state", "still");
+        imgOutput.attr("class","gif m-1 rounded").attr("data-state", "still");
         
         // add additional attributes data-still and data-animate such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
         imgOutput.attr("data-still", stillGif);
         imgOutput.attr("data-animate", animatedGif);
 
-        // append the image to #gifs-view div
+        // get ratings
+        var gifRating = results[i].rating;
+        // add rating to paragraph
+        var pRating = $("<p>").text("Rated: " + gifRating);
+        // not yet doing anything with this as it caused new layout problems so for now not including ratings, later will figure it out so everything flows correctly on page
+
+        // append the img to #gifs-view div
         $("#gifs-view").append(imgOutput);
+
+        //prepend the rating to the image
     }
   });
 }
