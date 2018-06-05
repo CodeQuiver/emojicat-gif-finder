@@ -26,7 +26,6 @@ function renderButtons() {
   };
 }
 
-
 //function runs when a topic button is clicked - AJAX call
 
 function topicClicked(input) {
@@ -124,12 +123,24 @@ $("#buttons-view").on("click", ".topic-btn", function() {
 } );
 
 
-// ==================================not yet added section- adding new topic buttons via the form=====================
+// onclick event to add new topic buttons via the form
   // triggered by submit button on form- study note - can be bound directly to the button without separate listener because button is original part of the DOM
-  // get value from input, trim spaces, and store in variable
-  // push new input to topics array
-  // call renderButtons function to re-print the array with new buttons added
+  
+ $("#add-topic").on("click", function(event) {
+  event.preventDefault();
 
+  // get value from input, trim spaces, and store in variable
+  var newTopic = $("#new-topic-input").val().trim();
+
+  // push new input to topics array
+  topics.push(newTopic);
+
+  // call renderButtons function to re-print the array with new buttons added
+  renderButtons();
+
+  //clear field so it's ready for later inputs- using javascript function to reset entire form which in this case has only one field
+  document.getElementById("new-topic-form").reset();
+ });
 
 
 //  onclick event to animate and stop animation of gifs
