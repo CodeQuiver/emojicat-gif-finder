@@ -2,7 +2,7 @@
 //add document ready function later//
 
 // ============================== Declare Global Variables ====================================================
-var topics = ["happy","sad","angry","annoyed","sneaky","funny","cool","hyper","sleepy","shy","relaxed","excited"];
+var topics = ["funny", "happy","sad","bored", "angry","annoyed","sneaky","lol","cool","crazy","sleepy","grumpy","relaxed","excited"];
   //initial array to be used for topic buttons
 
 // ============================== End Global Variables ====================================================
@@ -17,7 +17,6 @@ function renderButtons() {
   // main function loop
   for (i = 0; i < topics.length; i++) {
   var buttonName = topics[i];
-  console.log(buttonName);
   var button = $("<button>").text(buttonName);
   button.attr("type", "button");
   button.attr("class","btn btn-md btn-info mr-2 ml-2 topic-btn");
@@ -34,9 +33,13 @@ function topicClicked(input) {
 
   //construct query url
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-  input + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
-        //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a 
-        // dash instead of space since that's what giphy's search function uses in the urls
+  input + "+cat&api_key=dc6zaTOxFJmzC&limit=10";
+
+  //Later may want to add offset property to search and possibly randomize the offset for more random results
+  //Alternate other search- random endpoint with tag of input parameter, but only returns one result so would need to be looped to build an object array
+  // var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" +
+  // input + "+cat&api_key=dc6zaTOxFJmzC";
+        //note I hard-coded the "+cat" so that all searches will be for cat images like "happy+cat" per documentation for handling phrases
   console.log(queryURL);
 
   //AJAX call
@@ -46,27 +49,40 @@ function topicClicked(input) {
   }).then(function(response) {
 
   console.log(response); //logs entire object including all 10 results
+
+  //since response is entire object, store the part leading to the level with multiple
+  // entries in variable so it can iterate correctly later
+  var results = response.data;
+  console.log(results); //this should log the array of 10 results
     
-    //add another for each loop to cover each result in the array
+    // loop through each result item in results array
+    for (i = 0; i < results.length; i++){
 
-        // get image wanted from object and store in variable
-        var currentGif = response.data[2].images.fixed_height_still.url;
+        // get image wanted to display from object and store in variable
+        // var currentGif = results[i].images.fixed_height_still.url;
+
         //get still and animated version urls and store in variables
-        var stillGif = response.data[2].images.fixed_height_still.url;
-        var animatedGif = response.data[2].images.fixed_height.url;
+        var stillGif = results[i].images.fixed_height_still.url;
+        var animatedGif = results[i].images.fixed_height.url;
 
-        console.log("currentGif is: " + currentGif);
+        // console.log("currentGif is: " + currentGif);
         console.log("stillGif is: " + stillGif);
         console.log("animatedGif is: " + animatedGif);
-        // create image element
-        // add source attribute to image
-        
-        // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
-        // add data-state="still" class="gif m-2 rounded" to the image
-        
-        // add necessary classes to element for bootstrap spacing
 
-        // append the image to #gifs-view
+        // create image element
+        var imgOutput = $("<img>");
+
+        // add source attribute (still version), classes, data-state
+        imgOutput.attr("src", stillGif);
+        imgOutput.attr("class","gif m-2 rounded").attr("data-state", "still");
+        
+        // add additional attributes data-still and data-animate such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
+        imgOutput.attr("data-still", stillGif);
+        imgOutput.attr("data-animate", animatedGif);
+
+        // append the image to #gifs-view div
+        $("#gifs-view").append(imgOutput);
+    }
   });
 }
 
@@ -94,47 +110,6 @@ $("#buttons-view").on("click", ".topic-btn", function() {
 
 // call function to add all buttons to page
 renderButtons();
-
-  // //clear previous gifs from div before adding new ones
-  // $("#gifs-view").empty();
-
-  // // store data-name from the clicked button in a variable to use in the queryurl
-  // var topic = $(this).attr("data-name");
-
-  // //construct query url
-  // var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-  //       topic + "-cat&api_key=dc6zaTOxFJmzC&limit=10";
-  //       //note I hard-coded the "-cat" so that all searches will be for cat images like "happy-cat" using a dash instead of space since that's what giphy's search function uses in the urls
-  // console.log(queryURL);
-       
-
-  // //AJAX call
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-  // }).then(function(response) {
-
-  //   console.log(response); //logs entire object including all 10 results
-      
-  //     //add another for each loop to cover each result in the array
-
-  //         // create image element
-  //         // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
-          
-  //         // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
-          
-  //         // add necessary classes to element for bootstrap spacing
-
-  //         // append the image to #gifs-view
-  // });
-
-
-
-
-
-
-
-
 
 
 
