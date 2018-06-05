@@ -25,7 +25,6 @@ function renderButtons() {
   $("#buttons-view").append(button);    
     
   };
-
 }
 
 
@@ -50,13 +49,20 @@ function topicClicked(input) {
     
     //add another for each loop to cover each result in the array
 
-        // create image element
         // get image wanted from object and store in variable
-        var pulledGif = response.data[2].images.fixed_height_still.url;
-        console.log("Gif pulled is: " + pulledGif);
-        // add source attribute to image- get image path inside response object, ending with .fixed_height.url, put the still version in the src attribute
+        var currentGif = response.data[2].images.fixed_height_still.url;
+        //get still and animated version urls and store in variables
+        var stillGif = response.data[2].images.fixed_height_still.url;
+        var animatedGif = response.data[2].images.fixed_height.url;
+
+        console.log("currentGif is: " + currentGif);
+        console.log("stillGif is: " + stillGif);
+        console.log("animatedGif is: " + animatedGif);
+        // create image element
+        // add source attribute to image
         
         // add additional attributes such that it can toggle between the still and animated versions of the url- imitate the image attributes in the example at the bottom of the html file
+        // add data-state="still" class="gif m-2 rounded" to the image
         
         // add necessary classes to element for bootstrap spacing
 
